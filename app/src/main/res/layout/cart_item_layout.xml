@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:id="@+id/tvcpname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5sp"
+            android:text="Tên Sản Phẩm"
+            android:textColor="#000"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/tvcqty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvcprice"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="5sp"
+            android:text="Giá"
+            android:textAlignment="viewStart"
+            android:textColor="#000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvcpname"/>
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:padding="5sp"
+            android:text="Qty"
+            android:textAlignment="textEnd"
+            android:textColor="#000"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/tvcamt"
+            app:layout_constraintStart_toEndOf="@+id/tvcpname"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvcamt"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:padding="5sp"
+            android:text="Số Lượng"
+            android:textAlignment="textEnd"
+            android:textColor="#000"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvcqty"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/gdefault">
+        <item
+            android:id="@+id/mhome"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Trang Chủ"/>
+        <item
+            android:id="@+id/mproducts"
+            android:icon="@drawable/ic_view_quilt_black_24dp"
+            android:title="Sản Phẩm"/>
+        <item
+            android:id="@+id/mcat"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Danh Mục"/>
+    </group>
+    <group android:id="@+id/gadmin">
+        <item
+            android:id="@+id/maddpro"
+            android:enabled="true"
+            android:icon="@drawable/ic_view_quilt_black_24dp"
+            android:title="Thêm Sản Phẩm"/>
+        <item
+            android:id="@+id/mshowall"
+            android:enabled="true"
+            android:icon="@drawable/ic_view_quilt_black_24dp"
+            android:title="Tất Cả Sản Phẩm"/>
+        <item
+            android:id="@+id/morders"
+            android:enabled= "true"
+            android:icon="@drawable/ic_view_quilt"
+            android:title="Đơn Hàng"/>
+    </group>
+
+<group android:id="@gcustomer">
+    <item
+        android:id="@+id/mcart"
+        android:enabled="true"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="Xem Giỏ Hàng"/>
+    <item
+        android:id="@+id/mnoti"
+        android:enabled="true"
+        android:icon="drawable/ic_notifications_active_black_24dp"
+        android:title="Lịch Sử Đơn Hàng"/>
+</group>
+    <group android:id="@+id/guser">
+        <item
+            android:id="@+id/mchangepwd"
+            android:enabled="true"
+            android:icon="@drawable/ic_person_add_black_24dp"
+            android:title="Đổi Mật Khẩu"/>
+        <item
+            android:id="@+id/mlogout"
+            android:enabled="true"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Đăng Xuất"/>
+    </group>
+</menu>

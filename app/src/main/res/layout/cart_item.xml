@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+    
+    <TextView
+        android:id="@+id/tvcpname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#950fac"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraitnStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <Button
+                android:id="@+id/bqminus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_bg"
+                android:text="-"
+                android:textColor="#fffcfc"
+                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/etcqty"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:padding="10dp"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <Button
+            android:id="@+id/bqadd"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/rounded_bg"
+            android:text="+"
+            android:textColor="#fffcfc"
+            android:textSize="30dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
