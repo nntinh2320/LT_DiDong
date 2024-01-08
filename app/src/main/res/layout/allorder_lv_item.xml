@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="40dp">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/twordate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#f0cbf6"
+            android:padding="6dp"
+            android:text="Ngày Đặt Hàng"
+            android:textAlignment="viewEnd"
+            android:textColor="#120000"
+            android:textSize="12dp"/>
+
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textColor="#000000"
+            android:textSize="14dp"/>
+        
+        
+        <TextView
+            android:id="@+id/tvcust"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:text="Tên Khách Hàng"
+            android:textColor="#000000"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:text="Trạng Thái Đơn Hàng"
+            android:textColor="#000000"
+            android:textSize="14dp"/>
+        
+        <TextView
+            android:id="@+id/tvoramt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#f0cbf6"
+            android:padding="6dp"
+            android:text="Tổng tiền"
+            android:textAlignment="viewEnd"
+            android:textColor="#090000"
+            android:textSize="14dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
