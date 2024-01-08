@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.window.SplashScreen;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +40,7 @@ public class AddProductFragment extends Fragment {
     private MediMartDbHelper db;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View vv=inflater.inflate(R.layout.fragment_add_product,container,false)
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +69,7 @@ public class AddProductFragment extends Fragment {
                    DocumentReference newpro = ff.collection("products").document();
                    Product p = new Product(pname,pcat,photoname,price);
                    p.setProid(newpro.getId());
-                   newpro.set(p).addOnCompleteListener((task)->{
+                   newpro.set(p).addOnCompleteListener((task1)->{
                        et1.setText("");
                        et2.setText("");
                        et3.setText("");

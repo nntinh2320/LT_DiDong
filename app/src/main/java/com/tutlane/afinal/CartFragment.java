@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.window.SplashScreen;
 
 import androidx.fragment.app.Fragment;
 
@@ -44,7 +43,7 @@ public class CartFragment extends Fragment {
         View vv=inflater.inflate(R.layout.fragment_cart,container,false);
         lv=vv.findViewById(R.id.lvcart);
         tv=vv.findViewById(R.id.textView9);
-        tv5=vv.findViewById(R.id.tvgsts);
+        tv5=vv.findViewById(R.id.tvvat);
         tv6=vv.findViewById(R.id.tvnet);
         b=vv.findViewById(R.id.fabcheckout);
         b.setVisibility(View.INVISIBLE);
@@ -131,7 +130,7 @@ public class CartFragment extends Fragment {
             View vv=inflater.inflate(R.layout.cart_item_layout,parent,false);
             TextView tv1=vv.findViewById(R.id.tvcpname);
             TextView tv2=vv.findViewById(R.id.tvcprice);
-            TextView tv3=vv.findViewById(R.id.tvcqty);
+            TextView tv3=vv.findViewById(R.id.);
             TextView tv4=vv.findViewById(R.id.tvcamt);
 
             tv1.setText(list.get(position).getProduct().getPname());
