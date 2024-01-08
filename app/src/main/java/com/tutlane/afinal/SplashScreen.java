@@ -33,7 +33,7 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        pbar = findViewById(R.id.progressBar);
+        pbar = findViewById(R.id.progresBar);
         handler.postDelayed(run, 1000);
         plist.clear();
         loadList();

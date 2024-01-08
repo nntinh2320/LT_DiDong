@@ -131,6 +131,15 @@ public class MediMartDbHelper extends SQLiteOpenHelper {
         return null ;
     }
 
+    public void addtocart(String userid,String pname,int qty)
+    {
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put("userid",userid);
+        cv.put("product",pname);
+        cv.put("qty",qty);
+        db.insert("cart",null,cv);
+    }
     public Cursor getCartItems(String userid)
     {
         SQLiteDatabase db=getReadableDatabase();
@@ -162,7 +171,7 @@ public class MediMartDbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public void updatePad(String userid,String pwd)
+    public void updatePwd(String userid,String pwd)
     {
         SQLiteDatabase db=getWritableDatabase();
         ContentValues cv=new ContentValues();

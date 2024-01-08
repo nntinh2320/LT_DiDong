@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MediMartUtils.loadFragment(this,new HomeFragment());
-        bnav=findViewById(R.id.bnavbar);
+        bnav=findViewById(R.id.bnavar);
         bnav.setOnNavigationItemSelectedListener(this);
         sp=getSharedPreferences("users",MODE_PRIVATE);
 
@@ -76,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         MediMartUtils.loadFragment(this,new RegisterFragment());
     }
     public void contactus(View view ){
-        MediMartUtils.loadFragment(this,new ContactusFragment());
+        MediMartUtils.loadFragment(this,new ContactUsFragment());
     }
     public void aboutus(View view){
-        MediMartUtils.loadFragment(this,new AboutusFragment());
+        MediMartUtils.loadFragment(this,new AboutUsFragment());
     }
 
 }

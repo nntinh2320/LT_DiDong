@@ -30,13 +30,13 @@ public class OrderDetailFragment extends Fragment
     private LinearLayout ll;
     private SharedPreferences sp;
 
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View vv =inflater(R.layout.fragment_order_details,container,false);
+    public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+        View vv=inflater.inflate(R.layout.fragment_order_details,container,false)
         lv=vv.findViewById(R.id.lvsub);
         db=new MediMartDbHelper(getContext());
-        tv=vv.findViewById(R.id.textview30);
+        tv=vv.findViewById(R.id.textView30);
         ll=vv.findViewById(R.id.linearLayout3);
         sp=getActivity().getSharedPreferences("users", Context.MODE_PRIVATE);
         final  String orderid=getArguments().getString("orderid");

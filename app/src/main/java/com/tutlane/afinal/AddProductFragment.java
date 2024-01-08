@@ -48,7 +48,7 @@ public class AddProductFragment extends Fragment {
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
                 startActivityForResult(intent,100);
             }
-        });t
+        });
 
         b.setOnClickListener(v -> {
                b.setEnabled(false);
@@ -57,7 +57,7 @@ public class AddProductFragment extends Fragment {
                sref = FirebaseStorage.getInstance().getReference();
                sref.putFile(uri)
                        .continueWithTask(task -> {
-                       if(task.isSuccesful())
+                       if(task.isSuccessful())
                            return sref.getDownloadUrl();
                        else
                            throw task.getException();
@@ -68,8 +68,8 @@ public class AddProductFragment extends Fragment {
                    final String pcat = et3.getText().toString();
                    DocumentReference newpro = ff.collection("products").document();
                    Product p = new Product(pname,pcat,photoname,price);
-                   p.setProdid(newpro.getId());
-                   newpro.set(p).addOnCompleteListener(task->{
+                   p.setProid(newpro.getId());
+                   newpro.set(p).addOnCompleteListener((task)->{
                        et1.setText("");
                        et2.setText("");
                        et3.setText("");
@@ -79,7 +79,6 @@ public class AddProductFragment extends Fragment {
                        b.setEnabled(true);
                        MediMartUtils.getList();
                    });
-               }
                });
         });
         return vv;

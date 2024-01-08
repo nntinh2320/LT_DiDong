@@ -178,7 +178,7 @@ public class CartFragment extends Fragment {
         }
         return null;
     }
-    public float toaalBill(){
+    public float totalBill(){
         List<CartItem> list=getList();
         float total=0;
         for(CartItem item:list){
