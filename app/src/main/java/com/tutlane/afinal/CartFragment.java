@@ -84,7 +84,7 @@ public class CartFragment extends Fragment {
             });
             builder.setPositiveButton("Delete Now",(dialog, which) -> {
                 Toast.makeText(getContext(),"Product Removed",Toast.LENGTH_SHORT).show();
-                db.deletefromcart(pname,userid,qty);
+                db.deletefromcart(pname,userid);
                 lv.setAdapter(new CustomAdapter(getList(),inflater));
                 calc();
             });

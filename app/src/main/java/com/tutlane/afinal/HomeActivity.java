@@ -2,6 +2,7 @@ package com.tutlane.afinal;
 
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -146,7 +147,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 f=new AddProductFragment();
                 break;
             case R.id.mshowall:
-                f=new AllProductFragment();
+                f=new AllProductsFragment();
                 break;
             case R.id.mlogout:
                 SharedPreferences.Editor edit=sp.edit();
