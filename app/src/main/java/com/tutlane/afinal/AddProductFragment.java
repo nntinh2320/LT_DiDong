@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -24,7 +26,6 @@ import com.google.firebase.storage.StorageReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import kotlinx.coroutines.scheduling.Task;
 
 public class AddProductFragment extends Fragment {
 
@@ -34,40 +35,33 @@ public class AddProductFragment extends Fragment {
     private EditText et1,et2,et3;
     private ImageView b1;
     private Button b;
-    private StorageReference sRef;
+    private StorageReference sref;
     private FirebaseFirestore ff;
     private Uri uri;
-    private DbHelper db;
+    private MediMartDbHelper db;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(Intent.ACTION_PICK);
-                Intent.setData();
+                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
                 startActivityForResult(intent,100);
             }
-        });
+        });t
 
-        b.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v){
+        b.setOnClickListener(v -> {
                b.setEnabled(false);
                SplashScreen.plist.clear();
                final String photo = new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()+".jpg");
                sref = FirebaseStorage.getInstance().getReference();
-               sref.putfile(uri)
-                       .continueWithTask(new Continuation<UploadTask.TaskSnapshot>, Task<Uri>(){
-                   @Override
-                   public Task<Uri> then(@NonNull Task<UploadTask.TakeSnapshot> task) throws Exception{
+               sref.putFile(uri)
+                       .continueWithTask(task -> {
                        if(task.isSuccesful())
                            return sref.getDownloadUrl();
                        else
                            throw task.getException();
-                   }
-           }).addOnCompleteListener(new MediaPlayer.OnCompletionListener<Uri>(){
-               @Override
-               public void onComplete(@NonNull Task<Uri> task){
+           }).addOnCompleteListener(task -> {
                    final String photoname=task.getResult().toString();
                    final String pname = et1.getText().toString();
                    final int price = Integer.parseInt(et2.getText().toString());
@@ -75,21 +69,18 @@ public class AddProductFragment extends Fragment {
                    DocumentReference newpro = ff.collection("products").document();
                    Product p = new Product(pname,pcat,photoname,price);
                    p.setProdid(newpro.getId());
-                   newpro.set(p).addOnCompleteListener(new OnCompleteListener<Void>(){
+                   newpro.set(p).addOnCompleteListener(task->{
                        et1.setText("");
                        et2.setText("");
                        et3.setText("");
-                       b1.setImageResource();
+                       b1.setImageResource(R.drawable.ic_baseline_image_24);
                        et1.requestFocus();
                        Toast.makeText(getContext(),"Product Saved",Toast.LENGTH_SHORT).show();
                        b.setEnabled(true);
-                       //MediMartUtils.getList();
-                       }
+                       MediMartUtils.getList();
                    });
                }
                });
-        }
-
         });
         return vv;
     }

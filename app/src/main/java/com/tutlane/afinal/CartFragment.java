@@ -19,6 +19,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.List;
+
 public class CartFragment extends Fragment {
     public CartFragment(){
 
@@ -29,7 +31,7 @@ public class CartFragment extends Fragment {
     private ListView lv;
     private TextView tv,tv5,tv6;
     private Button b;
-    private AllProductFragment.CustomAdapter adp;
+    private CustomAdapter adp;
     private List<CartItem> list;
     private int qty;
     @Override
@@ -87,7 +89,7 @@ public class CartFragment extends Fragment {
             builder.show();
         });
         if(list.size()==0){
-            MediMartUtils.loadWithoutHistoryFragment(getActivity(),new EmptyCartFragment());
+            MediMartUtils.loadwithoutHistoryFragment(getActivity(),new EmptyCartFragment());
         }
         else{
             adp=new CustomAdapter(list,inflater);
