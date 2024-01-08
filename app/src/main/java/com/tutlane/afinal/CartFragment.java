@@ -3,6 +3,7 @@ package com.tutlane.afinal;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartFragment extends Fragment {
@@ -178,7 +180,7 @@ public class CartFragment extends Fragment {
         }
         return null;
     }
-    public float toaalBill(){
+    public float totalBill(){
         List<CartItem> list=getList();
         float total=0;
         for(CartItem item:list){
