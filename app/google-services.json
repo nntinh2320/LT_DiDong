@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "338329605275",
+    "project_id": "ltdidong-caf1c",
+    "storage_bucket": "ltdidong-caf1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338329605275:android:4b774fc5dae0845636a23e",
+        "android_client_info": {
+          "package_name": "com.tutlane.afinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC26kVxHwSa-StKKC84xI7R8Bmm7o2wesc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
