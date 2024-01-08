@@ -43,7 +43,7 @@ public class MediMartUtils {
     public static void getList()
     {
         FirebaseFirestore ff= FirebaseFirestore.getInstance();
-        SplashScreen.plit.clear();
+        SplashScreen.plist.clear();
         ff.collection("products")
                 .get()
                 .addOnCompleteListener((task -> {
@@ -52,7 +52,7 @@ public class MediMartUtils {
                         for(QueryDocumentSnapshot ds : task.getResult())
                         {
                             Product pp = ds.toObject(Product.class);
-                            SplashScreen.plit.add(pp);
+                            SplashScreen.plist.add(pp);
                         }
                     }
                 }));

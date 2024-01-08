@@ -129,7 +129,7 @@ public class OrderDetailFragment extends Fragment
             {
                 for(Product p :SplashScreen.plist)
                 {
-                    if(p.getPname().equal(pname))
+                    if(p.getPname().equals(pname))
                     {
                         return p.getPrice();
                     }
