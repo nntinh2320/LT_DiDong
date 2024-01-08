@@ -77,9 +77,9 @@ public class DetailsFragment extends Fragment {
                 MediMartUtils.loadFragment(getActivity(),new LoginFragment());
             }
             else{
-                String pname=tv.getText().toString();
+                String pname2=tv.getText().toString();
                 int qty = Integer.parseInt(et.getText().toString());
-                db.addtocart(userid,pname,qty);
+                db.addtocart(userid,pname2,qty);
 
                 final Snackbar sn= Snackbar.make(v,"Product Added to cart",Snackbar.LENGTH_LONG);
                 sn.show();
@@ -92,7 +92,7 @@ public class DetailsFragment extends Fragment {
     private void findproduct(String pname) {
         for(Product pp: SplashScreen.plist){
             if(pp.getPname().equals(pname)){
-                tv.setText(pp.getPname);
+                tv.setText(pp.getPname());
                 tv2.setText(""+pp.getPrice());
                 Glide.with(getContext())
                         .load(pp.getPic())

@@ -3,6 +3,7 @@ package com.tutlane.afinal;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartFragment extends Fragment {
@@ -130,7 +132,7 @@ public class CartFragment extends Fragment {
             TextView tv1=vv.findViewById(R.id.tvcpname);
             TextView tv2=vv.findViewById(R.id.tvcprice);
             TextView tv3=vv.findViewById(R.id.tvcqty);
-            TextView tv4=vv.findViewById(R.id.tvcart);
+            TextView tv4=vv.findViewById(R.id.tvcamt);
 
             tv1.setText(list.get(position).getProduct().getPname());
             float price=list.get(position).getProduct().getPrice();

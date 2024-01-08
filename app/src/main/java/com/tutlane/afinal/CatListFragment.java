@@ -9,8 +9,11 @@ import android.widget.TextView;
 import android.window.SplashScreen;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class CatListFragment extends Fragment {
         private List<String> list;
         public RVAdapter(List<String> list){
             this.list=list;
-            Log.d("anand","RVAdapter: "++list.size());
+            Log.d("anand","RVAdapter: "+list.size());
         }
         @NonNull
         @Override
@@ -52,7 +55,7 @@ public class CatListFragment extends Fragment {
         }
         @Override
         public void onBindViewHolder(@NonNull RVViewHolder holder, final int position){
-            holder.tvpname.setText(list,get(position));
+            holder.tvpname.setText(list.get(position));
             holder.itemView.setOnClickListener(view ->{
                 CategoryFragment cf=new CategoryFragment();
                 Bundle b=new Bundle();
