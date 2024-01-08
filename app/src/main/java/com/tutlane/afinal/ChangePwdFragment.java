@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class ChangePwdFragment extends Fragment {
     public ChangePwdFragment(){
 
@@ -39,22 +41,22 @@ public class ChangePwdFragment extends Fragment {
         final String userid=sp.getString("userid","guest");
         final String role=sp.getString("role","no");
 
-        Cursor c=null;
+        AtomicReference<Cursor> c=null;
         if(role.equals("customer")){
-            c=db.findcustomer(userid);
+            c.set(db.findcustomer(userid));
         }
         else{
-            c=db.findVendor(userid);
+            c.set(db.findVendor(userid));
         }
-        c.moveToNext();
-        tv.setText(c.getString(1));
+        c.get().moveToNext();
+        tv.setText(c.get().getString(1));
 
         b.setOnClickListener(v -> {
             final String pwd=et1.getText().toString();
             final String npwd=et2.getText().toString();
             final String cpwd=et3.getText().toString();
-            Cursor c=db.validate(userid,pwd);
-            if(c.moveToNext()){
+            c.set(db.validate(userid, pwd));
+            if(c.get().moveToNext()){
                 if(npwd.equals(cpwd)){
                     db.updatePwd(userid,npwd);
                     MediMartUtils.loadwithoutHistoryFragment(getActivity(),new ProfileFragment());

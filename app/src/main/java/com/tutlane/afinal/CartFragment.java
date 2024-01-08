@@ -132,7 +132,7 @@ public class CartFragment extends Fragment {
             TextView tv1=vv.findViewById(R.id.tvcpname);
             TextView tv2=vv.findViewById(R.id.tvcprice);
             TextView tv3=vv.findViewById(R.id.tvcqty);
-            TextView tv4=vv.findViewById(R.id.tvcart);
+            TextView tv4=vv.findViewById(R.id.tvcamt);
 
             tv1.setText(list.get(position).getProduct().getPname());
             float price=list.get(position).getProduct().getPrice();
