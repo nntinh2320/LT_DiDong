@@ -1,0 +1,92 @@
+Index: app/src/main/java/com/tutlane/afinal/CartFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutlane.afinal;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.content.Context;\r\nimport android.content.SharedPreferences;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\nimport android.window.SplashScreen;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.google.android.material.snackbar.BaseTransientBottomBar;\r\nimport com.google.android.material.snackbar.Snackbar;\r\n\r\nimport java.util.List;\r\n\r\npublic class CartFragment extends Fragment {\r\n    public CartFragment(){\r\n\r\n    }\r\n\r\n    private MediMartDbHelper db;\r\n    private SharedPreferences sp;\r\n    private ListView lv;\r\n    private TextView tv,tv5,tv6;\r\n    private Button b;\r\n    private CustomAdapter adp;\r\n    private List<CartItem> list;\r\n    private int qty;\r\n    @Override\r\n    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){\r\n        db=new MediMartDbHelper(getContext());\r\n        getActivity().setTitle(\"Your Cart\");\r\n        sp=getActivity().getSharedPreferences(\"users\", Context.MODE_PRIVATE);\r\n        View vv=inflater.inflate(R.layout.fragment_cart,container,false);\r\n        lv=vv.findViewById(R.id.lvcart);\r\n        tv=vv.findViewById(R.id.textView9);\r\n        tv5=vv.findViewById(R.id.tvgsts);\r\n        tv6=vv.findViewById(R.id.tvnet);\r\n        b=vv.findViewById(R.id.fabcheckout);\r\n        b.setVisibility(View.INVISIBLE);\r\n        list=getList();\r\n        lv.setOnItemClickListener((parent, view, position, id) -> {\r\n            final String pname=list.get(position).getProduct().getPname();\r\n            qty=list.get(position).getQty();\r\n            final String userid=sp.getString(\"userid\",\"guest\");\r\n            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());\r\n            View vv = getLayoutInflater().inflate(R.layout.cart_item,null,false);\r\n            TextView tv1=vv.findViewById(R.id.tvcpname);\r\n            final TextView et1=vv.findViewById(R.id.etcqty);\r\n            Button b1=vv.findViewById(R.id.bqminus);\r\n            Button b2=vv.findViewById(R.id.bqadd);\r\n            b2.setOnClickListener((v)->{\r\n                qty=Integer.parseInt(et1.getText().toString())+1;\r\n                et1.setText(\"\"+(qty));\r\n            });\r\n            b1.setOnClickListener((v)->{\r\n                qty=Integer.parseInt(et1.getText().toString());\r\n                if(qty==1){\r\n                    Snackbar.make(v,\"Minimum Quantity 1\", BaseTransientBottomBar.LENGTH_LONG).show();\r\n                }\r\n                else{\r\n                    qty--;\r\n                    et1.setText(\"\"+(qty));\r\n                }\r\n            });\r\n            tv1.setText(pname);\r\n            et1.setText(\"\"+qty);\r\n            builder.setView(vv);\r\n            builder.setTitle(\"Cart Item Update\");\r\n            builder.setNegativeButton(\"Update Quantity\",(dialog, which) -> {\r\n               db.updatecart(pname,userid,qty);\r\n               lv.setAdapter(new CustomAdapter(getList(),inflater));\r\n               calc();\r\n            });\r\n            builder.setPositiveButton(\"Delete Now\",(dialog, which) -> {\r\n                Toast.makeText(getContext(),\"Product Removed\",Toast.LENGTH_SHORT).show();\r\n                db.deletefromcart(pname,userid,qty);\r\n                lv.setAdapter(new CustomAdapter(getList(),inflater));\r\n                calc();\r\n            });\r\n            builder.show();\r\n        });\r\n        if(list.size()==0){\r\n            MediMartUtils.loadwithoutHistoryFragment(getActivity(),new EmptyCartFragment());\r\n        }\r\n        else{\r\n            adp=new CustomAdapter(list,inflater);\r\n            lv.setAdapter(adp);\r\n            calc();\r\n            b.setVisibility(View.VISIBLE);\r\n            b.setOnClickListener(v -> {\r\n                MediMartUtils.loadFragment(getActivity(),new PaymentFragment());\r\n            });\r\n        }\r\n        return vv;\r\n    }\r\n\r\n    private void calc(){\r\n        float amount=totalBill();\r\n        tv.setText(String.format(\"%.2f\",amount));\r\n        float gst=amount*.10f;\r\n        float net=amount+gst;\r\n        tv5.setText(String.format(\"%.2f\",gst));\r\n        tv6.setText(String.format(\"%.2f\",net));\r\n    }\r\n    private class CustomAdapter extends BaseAdapter{\r\n        private List<CartItem> list;\r\n        private LayoutInflater inflater;\r\n        public CustomAdapter(List<CartItem> list, LayoutInflater inflater){\r\n            this.list=list;\r\n            this.inflater= inflater;\r\n        }\r\n        @Override\r\n        public int getCount(){return list.size();}\r\n        @Override\r\n        public Object getItem(int positon){return list.get(positon);}\r\n        @Override\r\n        public long getItemId(int position){return 0;}\r\n        @Override\r\n        public View getView(int position, View convertView, ViewGroup parent){\r\n            View vv=inflater.inflate(R.layout.cart_item_layout,parent,false);\r\n            TextView tv1=vv.findViewById(R.id.tvcpname);\r\n            TextView tv2=vv.findViewById(R.id.tvcprice);\r\n            TextView tv3=vv.findViewById(R.id.tvcqty);\r\n            TextView tv4=vv.findViewById(R.id.tvcart);\r\n\r\n            tv1.setText(list.get(position).getProduct().getPname());\r\n            float price=list.get(position).getProduct().getPrice();\r\n            int qty=list.get(position).getQty();\r\n            float amount=price*qty;\r\n            tv2.setText(String.format(\"%.2f\",price));\r\n            tv3.setText(String.valueOf(qty));\r\n            tv4.setText(String.format(\"%.2f\",amount));\r\n\r\n            if(position%2==0){\r\n                vv.setBackgroundResource(R.color.fav1);\r\n            }\r\n            else{\r\n                vv.setBackgroundResource(R.color.fav2);\r\n            }\r\n            return vv;\r\n        }\r\n\r\n    }\r\n    public List<CartItem> getList(){\r\n        String userid=sp.getString(\"userid\",\"guest\");\r\n        List<CartItem> list=null;\r\n        if(userid.equals(\"guest\")){\r\n            Toast.makeText(getContext(),\"Please Login First\",Toast.LENGTH_SHORT).show();\r\n        }\r\n        else{\r\n            Cursor c = db.getCartItems(userid);\r\n            list=new ArrayList<>();\r\n            while(c.moveToNext()){\r\n                String pname=c.getString(2);\r\n                Product product=findByName(pname);\r\n                int qty=c.getInt(3);\r\n                CartItem item=new CartItem(product,qty,userid);\r\n                list.add(item);\r\n            }\r\n        }\r\n        return list;\r\n    }\r\n    private Product findByName(String pname){\r\n        List<Product> list= SplashScreen.plist;\r\n        for(Product p: list){\r\n            if(p.getPname().equals(pname)){\r\n                return p;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n    public float toaalBill(){\r\n        List<CartItem> list=getList();\r\n        float total=0;\r\n        for(CartItem item:list){\r\n            total+=(item.getQty()*item.getProduct().getPrice());\r\n        }\r\n        return total;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutlane/afinal/CartFragment.java b/app/src/main/java/com/tutlane/afinal/CartFragment.java
+--- a/app/src/main/java/com/tutlane/afinal/CartFragment.java	
++++ b/app/src/main/java/com/tutlane/afinal/CartFragment.java	
+@@ -3,6 +3,7 @@
+ import android.app.AlertDialog;
+ import android.content.Context;
+ import android.content.SharedPreferences;
++import android.database.Cursor;
+ import android.os.Bundle;
+ import android.view.LayoutInflater;
+ import android.view.View;
+@@ -19,6 +20,7 @@
+ import com.google.android.material.snackbar.BaseTransientBottomBar;
+ import com.google.android.material.snackbar.Snackbar;
+ 
++import java.util.ArrayList;
+ import java.util.List;
+ 
+ public class CartFragment extends Fragment {
+@@ -42,7 +44,7 @@
+         View vv=inflater.inflate(R.layout.fragment_cart,container,false);
+         lv=vv.findViewById(R.id.lvcart);
+         tv=vv.findViewById(R.id.textView9);
+-        tv5=vv.findViewById(R.id.tvgsts);
++        tv5=vv.findViewById(R.id.tvvat);
+         tv6=vv.findViewById(R.id.tvnet);
+         b=vv.findViewById(R.id.fabcheckout);
+         b.setVisibility(View.INVISIBLE);
+@@ -82,7 +84,7 @@
+             });
+             builder.setPositiveButton("Delete Now",(dialog, which) -> {
+                 Toast.makeText(getContext(),"Product Removed",Toast.LENGTH_SHORT).show();
+-                db.deletefromcart(pname,userid,qty);
++                db.deletefromcart(pname,userid);
+                 lv.setAdapter(new CustomAdapter(getList(),inflater));
+                 calc();
+             });
+@@ -106,9 +108,9 @@
+     private void calc(){
+         float amount=totalBill();
+         tv.setText(String.format("%.2f",amount));
+-        float gst=amount*.10f;
+-        float net=amount+gst;
+-        tv5.setText(String.format("%.2f",gst));
++        float vat=amount*.10f;
++        float net=amount+vat;
++        tv5.setText(String.format("%.2f",vat));
+         tv6.setText(String.format("%.2f",net));
+     }
+     private class CustomAdapter extends BaseAdapter{
+@@ -130,7 +132,7 @@
+             TextView tv1=vv.findViewById(R.id.tvcpname);
+             TextView tv2=vv.findViewById(R.id.tvcprice);
+             TextView tv3=vv.findViewById(R.id.tvcqty);
+-            TextView tv4=vv.findViewById(R.id.tvcart);
++            TextView tv4=vv.findViewById(R.id.tvcamt);
+ 
+             tv1.setText(list.get(position).getProduct().getPname());
+             float price=list.get(position).getProduct().getPrice();
+@@ -178,7 +180,7 @@
+         }
+         return null;
+     }
+-    public float toaalBill(){
++    public float totalBill(){
+         List<CartItem> list=getList();
+         float total=0;
+         for(CartItem item:list){
+Index: app/src/main/res/layout/edit_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:orientation=\"vertical\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/eteitname\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textPersonName\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/eteditprice\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"number\"/>\r\n\r\n</LinearLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/edit_item.xml b/app/src/main/res/layout/edit_item.xml
+--- a/app/src/main/res/layout/edit_item.xml	
++++ b/app/src/main/res/layout/edit_item.xml	
+@@ -5,7 +5,7 @@
+     android:layout_height="match_parent">
+ 
+     <EditText
+-        android:id="@+id/eteitname"
++        android:id="@+id/eteditname"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:ems="10"

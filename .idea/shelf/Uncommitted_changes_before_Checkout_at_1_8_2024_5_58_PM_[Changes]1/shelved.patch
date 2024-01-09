@@ -1,0 +1,78 @@
+Index: app/src/main/java/com/tutlane/afinal/CatListFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutlane.afinal;\r\n\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\nimport android.window.SplashScreen;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport java.util.List;\r\n\r\npublic class CatListFragment extends Fragment {\r\n    public CatListFragment(){\r\n\r\n    }\r\n\r\n    private RecyclerView rv;\r\n    private FirebaseFirestore ff;\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){\r\n        View vv=inflater.inflate(R.layout.fragment_catlist,container,false);\r\n        rv=vv.findViewById(R.id.rvcats);\r\n        rv.setLayoutManager(new GridLayoutManager(getActivity(),2));\r\n        rv.setHasFixedSize(true);\r\n        rv.setAdapter(new RVAdapter(SplashScreen.catlist));\r\n        return vv;\r\n    }\r\n    class RVViewHolder extends RecyclerView.ViewHolder{\r\n        public TextView tvpname;\r\n        public RVViewHolder(@NonNull View itemView){\r\n            super(itemView);\r\n            tvpname=itemView.findViewById(R.id.textView27);\r\n        }\r\n    }\r\n    class RVAdapter extends RecyclerView.Adapter<RVViewHolder>{\r\n        private List<String> list;\r\n        public RVAdapter(List<String> list){\r\n            this.list=list;\r\n            Log.d(\"anand\",\"RVAdapter: \"++list.size());\r\n        }\r\n        @NonNull\r\n        @Override\r\n        public RVViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){\r\n            View vv=LayoutInflater.from(getContext()).inflate(R.layout.cat_item,parent,false);\r\n            RVViewHolder rvViewHolder=new RVViewHolder(vv);\r\n            return rvViewHolder;\r\n        }\r\n        @Override\r\n        public void onBindViewHolder(@NonNull RVViewHolder holder, final int position){\r\n            holder.tvpname.setText(list,get(position));\r\n            holder.itemView.setOnClickListener(view ->{\r\n                CategoryFragment cf=new CategoryFragment();\r\n                Bundle b=new Bundle();\r\n                b.putString(\"cat\",list.get(position));\r\n                cf.setArguments(b);\r\n                MediMartUtils.loadFragment(getActivity(),cf);\r\n            });\r\n        }\r\n        @Override\r\n        public int getItemCount(){return list.size();}\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutlane/afinal/CatListFragment.java b/app/src/main/java/com/tutlane/afinal/CatListFragment.java
+--- a/app/src/main/java/com/tutlane/afinal/CatListFragment.java	
++++ b/app/src/main/java/com/tutlane/afinal/CatListFragment.java	
+@@ -9,9 +9,12 @@
+ import android.window.SplashScreen;
+ 
+ import androidx.annotation.NonNull;
++import androidx.fragment.app.Fragment;
+ import androidx.recyclerview.widget.GridLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
++import com.google.firebase.firestore.FirebaseFirestore;
++
+ import java.util.List;
+ 
+ public class CatListFragment extends Fragment {
+@@ -41,7 +44,7 @@
+         private List<String> list;
+         public RVAdapter(List<String> list){
+             this.list=list;
+-            Log.d("anand","RVAdapter: "++list.size());
++            Log.d("anand","RVAdapter: "+list.size());
+         }
+         @NonNull
+         @Override
+@@ -52,7 +55,7 @@
+         }
+         @Override
+         public void onBindViewHolder(@NonNull RVViewHolder holder, final int position){
+-            holder.tvpname.setText(list,get(position));
++            holder.tvpname.setText(list.get(position));
+             holder.itemView.setOnClickListener(view ->{
+                 CategoryFragment cf=new CategoryFragment();
+                 Bundle b=new Bundle();
+Index: app/src/main/java/com/tutlane/afinal/CategoryFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutlane.afinal;\r\n\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.Menu;\r\nimport android.view.MenuInflater;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Filter;\r\nimport android.widget.Filterable;\r\nimport android.widget.ImageView;\r\nimport android.widget.SearchView;\r\nimport android.widget.TextView;\r\nimport android.window.SplashScreen;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport java.sql.Array;\r\nimport java.util.ArrayList;\r\n\r\npublic class CategoryFragment extends Fragment {\r\n    public CategoryFragment(){\r\n\r\n    }\r\n\r\n    private RecyclerView rv;\r\n    private SearchView.OnQueryTextListener queryTextListener;\r\n    private SearchView searchView=null;\r\n    private RVAdapter adp;\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){\r\n        View vv= inflater.inflate(R.layout.fragment_category,container,false);\r\n        rv=vv.findViewById(R.id.rvgrid);\r\n        rv.setLayoutManager(new GridLayoutManager(getActivity(),3));\r\n        rv.setHasFixedSize(true);\r\n        Bundle b=getArguments();\r\n\r\n        List<Product> plist=new ArrayList<>();\r\n\r\n        if(b!=null){\r\n            String cat=b.getString(\"cat\").trim();\r\n            for(Product p: SplashScreen.plist){\r\n                if(p.getPcat().trim().equalsIgnoreCase(cat)){\r\n                    plist.add(p);\r\n                }\r\n            }\r\n        }\r\n        else{\r\n            plist=SplashScreen.plist;\r\n        }\r\n        adp=new RVAdapter(plist);\r\n        rv.setAdapter(adp);\r\n        return vv;\r\n    }\r\n\r\n    @Override\r\n    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater){\r\n        menu.clear();\r\n        inflater.inflate(R.menu.search_menu,menu);\r\n        MenuItem searchItem=menu.findItem(R.id.app_bar_search);\r\n        if(searchItem!=null){\r\n            Log.d(\"anand\",\"onCreateOptiosnMenu\");\r\n            searchView=(SearchView) searchItem.getActionView();\r\n            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {\r\n                @Override\r\n                public boolean onQueryTextSubmit(String query) {\r\n                    Log.d(\"anand\",\"onQueryTextSubmit:\"+query);\r\n                    return true;\r\n                }\r\n\r\n                @Override\r\n                public boolean onQueryTextChange(String newText) {\r\n                    Log.d(\"anand\",\"onQueryTextSubmit:\"+newText);\r\n                    adp.getFilter().filter(newText);\r\n                    return true;\r\n                }\r\n            });\r\n        }\r\n    }\r\n    public boolean onOptionsItemSelected(@NonNull MenuItem item){return true;}\r\n    @Override\r\n    public void onCreate(@Nullable Bundle savedInstanceState){\r\n        super.onCreate(savedInstanceState);\r\n        setHasOptionsMenu(true);\r\n    }\r\n    class RVViewHolder extends RecyclerView.ViewHolder{\r\n        public ImageView ivpic;\r\n        public TextView tvpname;\r\n        public TextView tvprice;\r\n        public RVViewHolder(@NonNull View itemView){\r\n            super(itemView);\r\n            tvpname=itemView.findViewById(R.id.tvpname);\r\n            tvprice=itemView.findViewById(R.id.tvprice);\r\n            ivpic=itemView.findViewById(R.id.ivprod);\r\n        }\r\n        public void setData(Product p){\r\n            tvpname.setText(p.getPname());\r\n            tvprice.setText(\"\"+p.getPrice());\r\n            Glide.with(getContext()).load(p.getPic())\r\n                    .into(ivpic);\r\n        }\r\n    }\r\n    class RVAdapter extends RecyclerView.Adapter<RVViewHolder> implements Filterable{\r\n        private List<Product> list;\r\n        private List<Product> templist=new ArrayList<>();\r\n        public RVAdapter(List<Product> list){\r\n            this.list=list;\r\n            templist.addAll(list);\r\n        }\r\n        @NonNull\r\n        @Override\r\n        public RVViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){\r\n            View vv= LayoutInflater.from(getContext()).inflate(R.layout.gv_product_item,parent,false);\r\n            RVViewHolder rvViewHolder=new RVViewHolder(vv);\r\n            return rvViewHolder;\r\n        }\r\n        @Override\r\n        public void onBindViewHolder(@NonNull RVViewHolder holder, final int position){\r\n            holder.setData(list.get(position));\r\n            holder.itemView.setOnClickListener(v -> {\r\n                DetailsFragment df=new DetailsFragment();\r\n                Bundle bundle=new Bundle();\r\n                bundle.putString(\"pname\",list.get(position).getPname());\r\n                df.setArguments(bundle);\r\n                MediMartUtils.loadFragment(getActivity(),df);\r\n            });\r\n        }\r\n        @Override\r\n        public int getItemCount(){return list.size();}\r\n\r\n        @Override\r\n        public Filter getFilter(){\r\n            return new Filter(){\r\n                @Override\r\n                protected FilterResults performFiltering(CharSequence charSequence){\r\n                    Log.d(\"anand\",\"performFiltering: \"+charSequence);\r\n                    List<Product> filteredList=new ArrayList<>();\r\n                    if(charSequence==null || charSequence.length()==0){\r\n                        filteredList.addAll(templist);\r\n                    }\r\n                    else{\r\n                        String pattern=charSequence.toString().trim().toLowerCase();\r\n                        for(Product p : templist){\r\n                            if(p.getPname().toLowerCase().trim().contains(pattern)){\r\n                                filteredList.add(p);\r\n                            }\r\n                        }\r\n                    }\r\n                    FilterResults results = new FilterResults();\r\n                    results.values=filteredList;\r\n                    return results;\r\n                }\r\n                @Override\r\n                protected void publishResults(CharSequence charSequence,FilterResults filterResults){\r\n                    list.clear();\r\n                    list.addAll((List<Product>)filterResults.values);\r\n                    notifyDataSetChanged();\r\n                }\r\n            };\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutlane/afinal/CategoryFragment.java b/app/src/main/java/com/tutlane/afinal/CategoryFragment.java
+--- a/app/src/main/java/com/tutlane/afinal/CategoryFragment.java	
++++ b/app/src/main/java/com/tutlane/afinal/CategoryFragment.java	
+@@ -23,6 +23,7 @@
+ 
+ import java.sql.Array;
+ import java.util.ArrayList;
++import java.util.List;
+ 
+ public class CategoryFragment extends Fragment {
+     public CategoryFragment(){
+Index: app/src/main/java/com/tutlane/afinal/AboutUsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutlane.afinal;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\n/**\r\n * A simple {@link Fragment} subclass.\r\n * Use the {@link AboutUsFragment#newInstance} factory method to\r\n * create an instance of this fragment.\r\n */\r\npublic class AboutUsFragment extends Fragment {\r\n\r\n    // TODO: Rename parameter arguments, choose names that match\r\n    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\n    private static final String ARG_PARAM1 = \"param1\";\r\n    private static final String ARG_PARAM2 = \"param2\";\r\n\r\n    // TODO: Rename and change types of parameters\r\n    private String mParam1;\r\n    private String mParam2;\r\n\r\n    public AboutUsFragment() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    /**\r\n     * Use this factory method to create a new instance of\r\n     * this fragment using the provided parameters.\r\n     *\r\n     * @param param1 Parameter 1.\r\n     * @param param2 Parameter 2.\r\n     * @return A new instance of fragment BlankFragment.\r\n     */\r\n    // TODO: Rename and change types and number of parameters\r\n    public static AboutUsFragment newInstance(String param1, String param2) {\r\n        AboutUsFragment fragment = new AboutUsFragment();\r\n        Bundle args = new Bundle();\r\n        args.putString(ARG_PARAM1, param1);\r\n        args.putString(ARG_PARAM2, param2);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            mParam1 = getArguments().getString(ARG_PARAM1);\r\n            mParam2 = getArguments().getString(ARG_PARAM2);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        getActivity().setTitle(\"About Us\");\r\n        return inflater.inflate(R.layout.fragment_blank, container, false);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutlane/afinal/AboutUsFragment.java b/app/src/main/java/com/tutlane/afinal/AboutUsFragment.java
+--- a/app/src/main/java/com/tutlane/afinal/AboutUsFragment.java	
++++ b/app/src/main/java/com/tutlane/afinal/AboutUsFragment.java	
+@@ -60,6 +60,6 @@
+                              Bundle savedInstanceState) {
+         // Inflate the layout for this fragment
+         getActivity().setTitle("About Us");
+-        return inflater.inflate(R.layout.fragment_blank, container, false);
++        return inflater.inflate(R.layout.fragment_aboutus, container, false);
+     }
+ }
+\ No newline at end of file

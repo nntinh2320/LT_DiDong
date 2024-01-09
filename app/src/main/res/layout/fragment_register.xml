@@ -173,10 +173,11 @@
                 android:layout_marginEnd="32dp"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_save_24"
-                app:backgroundTint="@color/colorPrimaryDark"
+                app:backgroundTint="@android:color/holo_red_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    </FrameLayout>
+</FrameLayout>
+

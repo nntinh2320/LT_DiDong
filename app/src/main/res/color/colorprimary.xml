@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <resources>
+        <style android:name="GreenText" android:parent="TextAppearance.AppCompat">
+            <item android:name="android:textColor">#00FF00</item>
+        </style>
+    </resources>
+</selector>
