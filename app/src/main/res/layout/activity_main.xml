@@ -11,29 +11,19 @@
         android:id="@+id/container2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bnavar"
+        app:layout_constraintBottom_toTopOf="@+id/bnavbar"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnavar"
+        android:id="@+id/bnavbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/design_default_color_primary_dark"
         app:itemIconTint="#fff"
         app:itemTextColor="#fff"
         app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-        android:background="@color/design_default_color_primary_dark"
-        app:itemIconTint="#fff"
-        app:itemTextColor="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_menu"/>

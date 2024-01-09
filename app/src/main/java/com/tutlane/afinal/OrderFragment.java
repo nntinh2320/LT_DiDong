@@ -49,7 +49,7 @@ public class OrderFragment extends Fragment {
             super(vv);
             tv1 = vv.findViewById(R.id.textView17);
             tv2 = vv.findViewById(R.id.textView18);
-            tv3 = vv.findViewById(R.id.tvourdate);
+            tv3 = vv.findViewById(R.id.tvordate);
             tv4 = vv.findViewById(R.id.tvoramt);
             tv5 = vv.findViewById(R.id.tvcust);
         }

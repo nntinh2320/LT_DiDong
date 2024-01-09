@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         tv=vv.findViewById(R.id.actvpnames);
         b1=vv.findViewById(R.id.bgetstarted);
         b2=vv.findViewById(R.id.bcallnow);
-        ib=vv.findViewById(R.id.inbsearch);
+        ib=vv.findViewById(R.id.imbsearch);
         db=new MediMartDbHelper(getContext());
 
         tv.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,getProductName()));
@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
         });
         currentpage=0;
         totalpage=pics.size();
-        vp.setAdapter(new SlidingAdapter());
+        vp.setAdapter(new SlidngAdapter());
         Timer timer=new Timer();
         final Handler handler=new Handler();
         timer.schedule(()->{handler.post(runnable)},3000,4000);
