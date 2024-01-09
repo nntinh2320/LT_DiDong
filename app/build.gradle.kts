@@ -36,7 +36,6 @@ android {
 
 dependencies {
 
-
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("androidx.appcompat:appcompat:1.6.1")

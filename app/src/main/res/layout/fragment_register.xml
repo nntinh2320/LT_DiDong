@@ -121,6 +121,7 @@
                 android:inputType="textWebEmailAddress"
                 android:singleLine="true"/>
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout7"
                 android:layout_width="0dp"
@@ -179,3 +180,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </FrameLayout>
+
