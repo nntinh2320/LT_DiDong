@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Handler;
 import java.util.logging.LogRecord;
+import android.os.Handler;
 
 public class SplashScreen extends Activity {
 
@@ -55,16 +55,19 @@ public class SplashScreen extends Activity {
                     }
                 });
     }
-
-    Runnable run = () -> {
-        counter++;
-        pbar.setProgress(counter);
-        if (counter == 100) {
-            finish();
-            startActivity(new Intent(SplashScreen.this, HomeActivity.class));
-        } else {
-            handler.postDelayed(this, 50);
+    Runnable run = new Runnable() {
+        @Override
+        public void run() {
+            counter++;
+            pbar.setProgress(counter);
+            if (counter == 100) {
+                finish();
+                startActivity(new Intent(SplashScreen.this, HomeActivity.class));
+            } else if (counter < 100) {
+                handler.postDelayed(run, 50);
+            }
         }
-    }
+    };
+
 
 }

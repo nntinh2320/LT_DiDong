@@ -32,18 +32,18 @@
             android:title="Đơn Hàng"/>
     </group>
 
-<group android:id="@gcustomer">
-    <item
-        android:id="@+id/mcart"
-        android:enabled="true"
-        android:icon="@drawable/ic_shopping_cart_black_24dp"
-        android:title="Xem Giỏ Hàng"/>
-    <item
-        android:id="@+id/mnoti"
-        android:enabled="true"
-        android:icon="drawable/ic_notifications_active_black_24dp"
-        android:title="Lịch Sử Đơn Hàng"/>
-</group>
+    <group android:id="@gcustomer">
+        <item
+            android:id="@+id/mcart"
+            android:enabled="true"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="Xem Giỏ Hàng"/>
+        <item
+            android:id="@+id/mnoti"
+            android:enabled="true"
+            android:icon="drawable/ic_notifications_active_black_24dp"
+            android:title="Lịch Sử Đơn Hàng"/>
+    </group>
     <group android:id="@+id/guser">
         <item
             android:id="@+id/mchangepwd"

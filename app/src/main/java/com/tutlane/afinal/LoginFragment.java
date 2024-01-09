@@ -63,7 +63,7 @@ public class LoginFragment extends Fragment {
                         edit.commit();
                         MediMartUtils.loadwithoutHistoryFragment(getActivity(),new CategoryFragment());
                     }
-                    ((MediMartUtils)getActivity()).loadmenu();
+                    ((HomeActivity)getActivity()).loadmenu();
                 }
                 else {
                     Toast.makeText(getContext(),"Invalid Username or Password",Toast.LENGTH_SHORT).show();

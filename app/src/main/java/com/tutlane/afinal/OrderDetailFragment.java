@@ -33,7 +33,7 @@ public class OrderDetailFragment extends Fragment
 
     @Override
     public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-        View vv=inflater.inflate(R.layout.fragment_order_details,container,false)
+        View vv=inflater.inflate(R.layout.fragment_order_details,container,false);
         lv=vv.findViewById(R.id.lvsub);
         db=new MediMartDbHelper(getContext());
         tv=vv.findViewById(R.id.textView30);

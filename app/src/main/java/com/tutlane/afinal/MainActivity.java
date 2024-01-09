@@ -1,5 +1,7 @@
 package com.tutlane.afinal;
 
+
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -10,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.Manifest;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MediMartUtils.loadFragment(this,new HomeFragment());
-        bnav=findViewById(R.id.bnavar);
+        bnav=findViewById(R.id.bnavbar);
         bnav.setOnNavigationItemSelectedListener(this);
         sp=getSharedPreferences("users",MODE_PRIVATE);
 
@@ -39,35 +42,29 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment f=null;
-        switch (item.getItemId()){
-            case R.id.mhome:
-                f=new HomeFragment();
-                break;
-            case R.id.mnoti:
-                f=new OrderHistoryFragment();
-                break;
-            case R.id.maccount:
-                String user = sp.getString("userid","guest");
-                if(user.equals("guest")){
-                    f=new AccountFragment();
+        Fragment f = null;
+        if (item.getItemId() == R.id.mhome) {
+            f = new HomeFragment();
+        } else if (item.getItemId() == R.id.mnoti) {
+            f = new OrderHistoryFragment();
+        } else if (item.getItemId() == R.id.maccount) {
+            String user = sp.getString("userid", "guest");
+            if (user.equals("guest")) {
+                f = new AccountFragment();
+            } else {
+                String role = sp.getString("role", "no");
+                if (role.equals("customer")) {
+                    f = new ProfileFragment();
+                } else {
+                    f = new VendorProfile();
                 }
-                else{
-                    String role = sp.getString("role","no");
-                    if(role.equals("customer")){
-                        f=new ProfileFragment();
-                    }
-                    else{
-                        f=new VendorProfile();
-                    }
-                }
-                break;
-            case R.id.mcart:
-                f=new CartFragment();
-                break;
+            }
+        } else if (item.getItemId() == R.id.mcart) {
+            f = new CartFragment();
         }
-        return MediMartUtils.loadFragment(this,f);
+        return MediMartUtils.loadFragment(this, f);
     }
+
 
     public void login(View view){
         MediMartUtils.loadFragment(this,new LoginFragment());

@@ -88,7 +88,7 @@ public class OrderHistoryFragment extends Fragment {
             tv1.setText("OrderID"+orderid);
             SimpleDateFormat sdf =new SimpleDateFormat("dd-MMM-yyyy");
             try{
-                String orddate =sdf.format(new SimpleDateFormat("yyyy-MM-dd").parse(c.getString(2)))
+                String orddate =sdf.format(new SimpleDateFormat("yyyy-MM-dd").parse(c.getString(2)));
                 tv3.setText("Order Date:"+orddate);
             }catch (Exception ex)
             {
