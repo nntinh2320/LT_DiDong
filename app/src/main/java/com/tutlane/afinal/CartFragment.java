@@ -53,19 +53,19 @@ public class CartFragment extends Fragment {
             qty=list.get(position).getQty();
             final String userid=sp.getString("userid","guest");
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            View vv = getLayoutInflater().inflate(R.layout.cart_item,null,false);
-            TextView tv1=vv.findViewById(R.id.tvcpname);
-            final TextView et1=vv.findViewById(R.id.etcqty);
-            Button b1=vv.findViewById(R.id.bqminus);
-            Button b2=vv.findViewById(R.id.bqadd);
-            b2.setOnClickListener((v)->{
+            View v = getLayoutInflater().inflate(R.layout.cart_item,null,false);
+            TextView tv1=v.findViewById(R.id.tvcpname);
+            final TextView et1=v.findViewById(R.id.etcqty);
+            Button b1=v.findViewById(R.id.bqminus);
+            Button b2=v.findViewById(R.id.bqadd);
+            b2.setOnClickListener((v1)->{
                 qty=Integer.parseInt(et1.getText().toString())+1;
                 et1.setText(""+(qty));
             });
-            b1.setOnClickListener((v)->{
+            b1.setOnClickListener((v1)->{
                 qty=Integer.parseInt(et1.getText().toString());
                 if(qty==1){
-                    Snackbar.make(v,"Minimum Quantity 1", BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(vv,"Minimum Quantity 1", BaseTransientBottomBar.LENGTH_LONG).show();
                 }
                 else{
                     qty--;
@@ -107,9 +107,9 @@ public class CartFragment extends Fragment {
     private void calc(){
         float amount=totalBill();
         tv.setText(String.format("%.2f",amount));
-        float gst=amount*.10f;
-        float net=amount+gst;
-        tv5.setText(String.format("%.2f",gst));
+        float vat=amount*.10f;
+        float net=amount+vat;
+        tv5.setText(String.format("%.2f",vat));
         tv6.setText(String.format("%.2f",net));
     }
     private class CustomAdapter extends BaseAdapter{
