@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
@@ -100,7 +101,7 @@ public class AllProductsFragment extends Fragment {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         Product p=task.getResult().toObjects(Product.class).get(0);
-                        StorageReference sref=FirebaseFirestore.getInstance()
+                        StorageReference sref= FirebaseStorage.getInstance()
                                 .getReferenceFromUrl(p.getPic());
                         sref.delete()
                                 .addOnSuccessListener((OnSuccessListener)aVoid->{

@@ -12,7 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.window.SplashScreen;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -71,7 +70,7 @@ public class HomeFragment extends Fragment {
         vp.setAdapter(new SlidngAdapter());
         Timer timer=new Timer();
         final Handler handler=new Handler();
-        timer.schedule(()->{handler.post(runnable)},3000,4000);
+        timer.schedule({handler.post(runnable)},3000,4000);
         return vv;
     }
 
@@ -96,7 +95,7 @@ public class HomeFragment extends Fragment {
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position){
-            View vv=LayoutInflater.from(getActivity().inflate(R.layout.sliding_layout,container,false));
+            View vv=LayoutInflater.from(getActivity()).inflate(R.layout.sliding_layout,container,false));
             ImageView iv=vv.findViewById(R.id.imageView);
             iv.setImageResource(pics.get(position));
             container.addView(vv);
