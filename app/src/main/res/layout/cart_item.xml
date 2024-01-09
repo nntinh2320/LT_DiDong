@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp">
-    
+
     <TextView
         android:id="@+id/tvcpname"
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#950fac"/>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,18 +36,19 @@
                 android:text="-"
                 android:textColor="#fffcfc"
                 android:textSize="30dp"/>
+
         <TextView
             android:id="@+id/etcqty"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
             android:padding="10dp"
             android:text="1"
             android:textAlignment="center"
             android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
         <Button
             android:id="@+id/bqadd"
             android:layout_width="40dp"

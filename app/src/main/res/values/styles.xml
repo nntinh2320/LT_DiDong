@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToolbarTheme">
+        <!-- Color used for the title of the Toolbar - as long as not overridden -->
+        <item name="android:textColorPrimary">@android:color/holo_red_dark</item>
+        <!-- Used to color back button and three dots -->
+        <item name="android:textColorSecondary">@android:color/holo_blue_dark</item>
+    </style>
+</resources>

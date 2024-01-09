@@ -13,13 +13,14 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.window.SplashScreen;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class CategoryFragment extends Fragment {
             }
         }
         else{
-            plist=SplashScreen.plist;
+            plist= SplashScreen.plist;
         }
         adp=new RVAdapter(plist);
         rv.setAdapter(adp);

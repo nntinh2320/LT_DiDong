@@ -21,15 +21,16 @@
         android:text="LAPTOP"
         android:textColor="#8F10a5"
         android:textSize="25dp"/>
-    
+
     <TextView
+        android:id="@+id/tvusername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:text="Chào mừng"
         android:textColor="#640873"
         android:textSize="18dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 
 </LinearLayout>
