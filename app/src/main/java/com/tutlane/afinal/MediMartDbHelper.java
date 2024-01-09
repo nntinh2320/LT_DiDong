@@ -74,7 +74,7 @@ public class MediMartDbHelper extends SQLiteOpenHelper {
         db.update("cart",cv,"userid=? and product = ?",new String[]{userid,pname});
     }
 
-    public boolean checkItemicart(String pname,String userid){
+    public boolean checkItemincart(String pname,String userid){
         SQLiteDatabase db=getReadableDatabase();
         Cursor c=db.rawQuery("SELECT * FROM cart WHERE userid=? and product=?",new String[]{userid,pname});
         return c.moveToNext();

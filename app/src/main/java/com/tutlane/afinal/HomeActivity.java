@@ -2,6 +2,7 @@ package com.tutlane.afinal;
 
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,11 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -146,7 +147,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 f=new AddProductFragment();
                 break;
             case R.id.mshowall:
-                f=new AllProductFragment();
+                f=new AllProductsFragment();
                 break;
             case R.id.mlogout:
                 SharedPreferences.Editor edit=sp.edit();

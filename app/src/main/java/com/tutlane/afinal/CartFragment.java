@@ -3,6 +3,7 @@ package com.tutlane.afinal;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +13,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.window.SplashScreen;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartFragment extends Fragment {
@@ -42,7 +43,7 @@ public class CartFragment extends Fragment {
         View vv=inflater.inflate(R.layout.fragment_cart,container,false);
         lv=vv.findViewById(R.id.lvcart);
         tv=vv.findViewById(R.id.textView9);
-        tv5=vv.findViewById(R.id.tvgsts);
+        tv5=vv.findViewById(R.id.tvvat);
         tv6=vv.findViewById(R.id.tvnet);
         b=vv.findViewById(R.id.fabcheckout);
         b.setVisibility(View.INVISIBLE);
@@ -82,7 +83,7 @@ public class CartFragment extends Fragment {
             });
             builder.setPositiveButton("Delete Now",(dialog, which) -> {
                 Toast.makeText(getContext(),"Product Removed",Toast.LENGTH_SHORT).show();
-                db.deletefromcart(pname,userid,qty);
+                db.deletefromcart(pname,userid);
                 lv.setAdapter(new CustomAdapter(getList(),inflater));
                 calc();
             });
@@ -129,8 +130,8 @@ public class CartFragment extends Fragment {
             View vv=inflater.inflate(R.layout.cart_item_layout,parent,false);
             TextView tv1=vv.findViewById(R.id.tvcpname);
             TextView tv2=vv.findViewById(R.id.tvcprice);
-            TextView tv3=vv.findViewById(R.id.tvcqty);
-            TextView tv4=vv.findViewById(R.id.tvcart);
+            TextView tv3=vv.findViewById(R.id.);
+            TextView tv4=vv.findViewById(R.id.tvcamt);
 
             tv1.setText(list.get(position).getProduct().getPname());
             float price=list.get(position).getProduct().getPrice();

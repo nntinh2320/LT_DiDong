@@ -60,6 +60,6 @@ public class AboutUsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getActivity().setTitle("About Us");
-        return inflater.inflate(R.layout.fragment_cartlist, container, false);
+        return inflater.inflate(R.layout.fragment_catlist, container, false);
     }
 }

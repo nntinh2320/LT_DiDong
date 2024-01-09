@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VendorProfile">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvprousername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="32dp"
+            android:text="textview"
+            android:textAlignment="center"
+            android:textColor="#0C0000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <Button
+            android:id="@+id/baddpro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="32dp"
+            android:background="#9F36B6"
+            android:text="Thêm sản phẩm"
+            android:textAllCaps="false"
+            android:textColor="#FDFDFD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bchangepwd"/>
+
+        <Button
+            android:id="@+id/ballprod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="32dp"
+            android:background="#9F36B6"
+            android:text="Xem sản phẩm"
+            android:textAllCaps="false"
+            android:textColor="#FDFDFD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/baddpro"/>
+        
+        <Button
+            android:id="@+id/blogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="32dp"
+            android:background="#03A9F4"
+            android:text="Đăng xuất"
+            android:textAllCaps="false"
+            android:textColor="#FDFDFD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvprousername"/>
+        
+        <Button
+            android:id="@+id/bchangepwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:background="#36B63B"
+            android:text="Đổi mật khẩu"
+            android:textAllCaps="false"
+            android:textColor="#FDFDFD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blogout"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
