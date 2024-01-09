@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         dlayout=findViewById(R.id.dlayout);
         nav=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
-        tv=findViewById(R.id.);
+        tv=findViewById(R.id.tvprousename);
         sp=getSharedPreferences("users",MODE_PRIVATE);
         db=new MediMartDbHelper(this);
         setSupportActionBar(toolbar);

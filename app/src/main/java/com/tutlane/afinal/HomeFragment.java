@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position){
-            View vv=LayoutInflater.from(getActivity()).inflate(R.layout.sliding_layout,container,false));
+            View vv=LayoutInflater.from(getActivity()).inflate(R.layout.sliding_layout,container,false);
             ImageView iv=vv.findViewById(R.id.imageView4);
             iv.setImageResource(pics.get(position));
             container.addView(vv);
