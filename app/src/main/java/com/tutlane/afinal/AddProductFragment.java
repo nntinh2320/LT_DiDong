@@ -42,14 +42,11 @@ public class AddProductFragment extends Fragment {
     private MediMartDbHelper db;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View vv=inflater.inflate(R.layout.fragment_add_product,container,false)
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        View vv=inflater.inflate(R.layout.fragment_add_product,container,false);
+        b1.setOnClickListener(v ->  {
                 Intent intent =new Intent(Intent.ACTION_PICK);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
                 startActivityForResult(intent,100);
-            }
         });
 
         b.setOnClickListener(v -> {
