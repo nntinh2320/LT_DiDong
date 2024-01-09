@@ -3,6 +3,7 @@ package com.tutlane.afinal;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,9 +69,19 @@ public class HomeFragment extends Fragment {
         currentpage=0;
         totalpage=pics.size();
         vp.setAdapter(new SlidngAdapter());
-        Timer timer=new Timer();
         final Handler handler=new Handler();
-        timer.schedule({handler.post(runnable)},3000,4000);
+        CountDownTimer timer = new CountDownTimer(3000, 4000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Không cần làm gì trong phương thức này nếu không cần thiết
+            }
+
+            @Override
+            public void onFinish() {
+                handler.post(runnable);
+                start();
+            }
+        };
         return vv;
     }
 
@@ -96,7 +107,7 @@ public class HomeFragment extends Fragment {
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position){
             View vv=LayoutInflater.from(getActivity()).inflate(R.layout.sliding_layout,container,false));
-            ImageView iv=vv.findViewById(R.id.imageView);
+            ImageView iv=vv.findViewById(R.id.imageView4);
             iv.setImageResource(pics.get(position));
             container.addView(vv);
             return vv;

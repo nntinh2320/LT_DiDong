@@ -32,7 +32,7 @@
             android:title="Đơn Hàng"/>
     </group>
 
-    <group android:id="@gcustomer">
+    <group android:id="@+id/gcustomer">
         <item
             android:id="@+id/mcart"
             android:enabled="true"

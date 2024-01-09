@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,7 +40,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
-        drawerToggle=new ActionBarDrawerToggle(this.getParent(),dlayout,toolbar,"On","Off");
+        drawerToggle=new ActionBarDrawerToggle(this.getParent(), dlayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         dlayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         nav.setNavigationItemSelectedListener(this);
@@ -124,43 +125,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item){
         Fragment f=null;
-        switch (item.getItemId()){
-            case R.id.mhome:
-                f=new HomeFragment();
-                break;
-            case R.id.mcat:
-                f=new CatListFragment();
-                break;
-            case R.id.mnoti:
-                f=new OrderHistoryFramgnet();
-                break;
-            case R.id.mproducts:
-                f=new CategoryFragment();
-                break;
-            case R.id.morders:
-                f=new OrdersFragment();
-                break;
-            case R.id.mchangepwd:
-                f=new ChangePwdFragment();
-                break;
-            case R.id.maddpro:
-                f=new AddProductFragment();
-                break;
-            case R.id.mshowall:
-                f=new AllProductsFragment();
-                break;
-            case R.id.mlogout:
-                SharedPreferences.Editor edit=sp.edit();
-                edit.remove("userid");
-                edit.remove("role");
-                edit.commit();
-                f=new CategoryFragment();
-                Toast.makeText(this, "Sign out successfully!", Toast.LENGTH_SHORT).show();
-                dlayout.closeDrawer(GravityCompat.START);
-                return MediMartUtils.loadwithoutHistoryFragment(this,f);
-            case R.id.mcart:
-                f=new CartFragment();
-                break;
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.mhome) {
+            f = new HomeFragment();
+        } else if (itemId == R.id.mcat) {
+            f = new CatListFragment();
+        } else if (itemId == R.id.mnoti) {
+            f = new OrderHistoryFragment();
+        } else if (itemId == R.id.mproducts) {
+            f = new CategoryFragment();
+        } else if (itemId == R.id.morders) {
+            f = new OrderFragment();
+        } else if (itemId == R.id.mchangepwd) {
+            f = new ChangePwdFragment();
+        } else if (itemId == R.id.maddpro) {
+            f = new AddProductFragment();
+        } else if (itemId == R.id.mshowall) {
+            f = new AllProductsFragment();
+        } else if (itemId == R.id.mlogout) {
+            SharedPreferences.Editor edit = sp.edit();
+            edit.remove("userid");
+            edit.remove("role");
+            edit.commit();
+            f = new CategoryFragment();
+            Toast.makeText(this, "Sign out successfully!", Toast.LENGTH_SHORT).show();
+            dlayout.closeDrawer(GravityCompat.START);
+            MediMartUtils.loadwithoutHistoryFragment(this, f);
+        } else if (itemId == R.id.mcart) {
+            f = new CartFragment();
         }
         dlayout.closeDrawer(GravityCompat.START);
         return MediMartUtils.loadFragment(this,f);
